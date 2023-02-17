@@ -80,6 +80,125 @@ function calc_insulin(classname){
     document.body.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(classname)[0].innerHTML = ans;
 }
 
+function save_cookie(){
+    let items = [
+        "alcohol",
+        "glucose-needle",
+        "LFS",
+        "insulin-needle",
+        "fast-acting-insulin",
+        "long-acting-insulin"
+    ];
+    let cookie_info = "SameSite=strict; Secure; Expires=Thu, 01 Jan 2099 00:00:00 GMT";
+
+    // 残数
+    let lst = document.getElementsByClassName("remaining-wrap")[0].getElementsByTagName("input");
+    for (let i = 0; i < items.length; i++) {
+        let value = lst[i].value;
+        let str = `remaining-${items[i]}=${value}; ${cookie_info}`;
+        document.cookie = str;
+    }
+
+    // 予備日
+    do{
+        let value = document.getElementById("spareday").value;
+        let str = `spareday=${value}; ${cookie_info}`;
+        document.cookie = str;
+    } while(0);
+
+    // インスリン1日使用量
+    let insulins = ["fast-acting-insulin", "long-acting-insulin"];
+    insulins.forEach(insulin => {
+        lst = document.getElementsByClassName("insulin-wrap")[0].getElementsByClassName(`day-use-${insulin}`);
+        for (let i = 0; i < lst.length; i++){
+            let value = lst[i].value;
+            let str = `day-use-${insulin}_${i}=${value}; ${cookie_info}`;
+            document.cookie = str;
+        }
+    });
+
+    // 1日使用量・最小受け取り単位
+    lst = document.getElementsByClassName("oneday-use-wrap")[0].getElementsByTagName("input");
+    let input_i = 0;
+    for (let item_i = 0; item_i < items.length; item_i++){
+        let item = items[item_i];
+        if (!insulins.includes(item)) {
+            let value = lst[input_i].value;
+            let str = `oneday-use-${item}=${value}; ${cookie_info}`;
+            document.cookie = str;
+            input_i++;
+        }
+        let value = lst[input_i].value;
+        let str = `min-${item}=${value}; ${cookie_info}`;
+        document.cookie = str;
+        input_i++;
+    }
+}
+
+function load_cookie(){
+    // cookie読み込み
+    let cookiesStr = document.cookie;
+    let cookieItems = cookiesStr.split(";");
+    let cookies = {};
+    for (let i = 0; i < cookieItems.length; i++) {
+        let elem = cookieItems[i].split("=");
+        elem[0] = elem[0].trim();
+        elem[1] = elem[1].trim();
+        cookies[elem[0]] = elem[1];
+    }
+
+    // 残数
+    let items = [
+        "alcohol",
+        "glucose-needle",
+        "LFS",
+        "insulin-needle",
+        "fast-acting-insulin",
+        "long-acting-insulin"
+    ];
+    let lst = document.getElementsByClassName("remaining-wrap")[0].getElementsByTagName("input");
+    for (let i = 0; i < items.length; i++) {
+        let str = `remaining-${items[i]}`;
+        lst[i].value = cookies[str];
+    }
+
+    // 予備日
+    do{
+        let value = document.getElementById("spareday");
+        let str = `spareday`;
+        value.value = cookies[str];
+    } while(0);
+
+    // インスリン1日使用量
+    let insulins = ["fast-acting-insulin", "long-acting-insulin"];
+    insulins.forEach(insulin => {
+        lst = document.getElementsByClassName("insulin-wrap")[0].getElementsByClassName(`day-use-${insulin}`);
+        for (let i = 0; i < lst.length; i++){
+            let value = lst[i];
+            let str = `day-use-${insulin}_${i}`;
+            value.value = cookies[str];
+        }
+    });
+
+    // 1日使用量・最小受け取り単位
+    lst = document.getElementsByClassName("oneday-use-wrap")[0].getElementsByTagName("input");
+    let input_i = 0;
+    for (let item_i = 0; item_i < items.length; item_i++){
+        let item = items[item_i];
+        if (!insulins.includes(item)) {
+            let value = lst[input_i];
+            let str = `oneday-use-${item}`;
+            value.value = cookies[str];
+            input_i++;
+        }
+        let value = lst[input_i];
+        let str = `min-${item}`;
+        value.value = cookies[str];
+        input_i++;
+    }
+
+}
+
 // 読み込み実行
 // 日付の初期化
 var date = new Date();
@@ -101,3 +220,5 @@ document.getElementById("days-until").innerHTML = diff_day;
 // インスリン1日使用量の初期化
 calc_insulin("fast-acting-insulin");
 calc_insulin("long-acting-insulin");
+
+load_cookie();
