@@ -1,52 +1,86 @@
-.insulin-wrap {
-    display: grid;
-    width: 1000px;
-    height: 300px;
-    grid-template-rows: repeat(3 1fr);
-    grid-template-columns: repeat(5, 1fr);
-    /* grid-auto-flow: column; */
+/* 文字サイズ */
+body {
+    font-size: large;
 }
 
-.oneday-use-wrap {
-    display: grid;
-    width: 1000px;
-    /* height: px; */
-    grid-template-rows: repeat(6, 1fr);
-    grid-template-columns: repeat(3, 1fr);
+h1 {
+    font-size: x-large;
 }
 
+/* 残数 */
 .remaining-wrap {
     display: grid;
-    width: 1000px;
-    /* height: 300px; */
+    width: 320px;
+    height: 300px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(2, 1fr);
 }
 
+/* 通院日 */
 .day-wrap{
     display: grid;
-    width: 1000px;
-    /* height: 300px; */
+    width: 700px;
+    height: 100px;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
+    text-align: center;
 }
 
-.necessary-unit-wrap{
+/* インスリン1日使用量 */
+.insulin-wrap {
     display: grid;
-    width: 1000px;
-    /* height: 300px; */
+    width: 700px;
+    height: 170px;
+    grid-template-rows: repeat(3 1fr);
+    grid-template-columns: repeat(5, 1fr);
+}
+
+/* 1日使用量・最小受け取り単位 */
+.oneday-use-wrap {
+    display: grid;
+    width: 480px;
+    height: 300px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(3, 1fr);
+    text-align: center;
 }
 
-.received-wrap{
+/* 詳細必要数 もらう量 */
+.received-wrap, .necessary-unit-wrap{
     display: grid;
-    width: 1000px;
-    /* height: 300px; */
+    width: 480px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(3, 1fr);
+    margin: 0px 0px 0px 20px;
 }
 
+.received-wrap > p, .necessary-unit-wrap > p {
+    text-align: center;
+    border-bottom: solid thin;
+}
+
+/* 各種要素 */
+.remaining-wrap > input, .oneday-use-wrap > input, .insulin-wrap input{
+    height: 25px;
+    width: 60px;
+    margin: 0 auto;
+}
+
+.remaining-wrap > p, .oneday-use-wrap > p, .insulin-wrap > p{
+    margin: 0 auto;
+}
+
+.day-wrap > input{
+    height: 25px;
+    width: 150px;
+    margin: 0 auto;
+}
+
+.day-wrap > p{
+    margin: 0 auto;
+}
+
+/* その他見栄え */
 hr {
     margin: 30px;
 }
