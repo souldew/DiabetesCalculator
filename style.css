@@ -1,6 +1,21 @@
 /* 文字サイズ */
+#pagetitle{
+    text-align: center;
+    font-size: xx-large;
+    padding-bottom: -10px;
+}
+#pagetitle > span{
+    font-size: xx-large;
+    color: royalblue;
+    border-bottom: double 5px royalblue;
+}
+
 body {
     font-size: large;
+}
+
+input{
+    font-size: 18px;
 }
 
 h1 {
@@ -38,7 +53,7 @@ h1 {
 /* 1日使用量・最小受け取り単位 */
 .oneday-use-wrap {
     display: grid;
-    width: 480px;
+    width: 540px;
     height: 300px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(3, 1fr);
