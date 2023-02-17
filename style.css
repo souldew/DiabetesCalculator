@@ -25,10 +25,11 @@ h1 {
 /* 残数 */
 .remaining-wrap {
     display: grid;
-    width: 320px;
+    width: 390px;
     height: 300px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(2, 1fr);
+    margin: 0px 0px 0px 20px;
 }
 
 /* 通院日 */
@@ -39,31 +40,33 @@ h1 {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
     text-align: center;
+    margin: 0px 0px 0px 20px;
 }
 
 /* インスリン1日使用量 */
 .insulin-wrap {
     display: grid;
-    width: 700px;
+    width: 640px;
     height: 170px;
     grid-template-rows: repeat(3 1fr);
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
 }
 
 /* 1日使用量・最小受け取り単位 */
 .oneday-use-wrap {
     display: grid;
-    width: 540px;
+    width: 640px;
     height: 300px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
+    margin: 0px 0px 0px 20px;
 }
 
 /* 詳細必要数 もらう量 */
 .received-wrap, .necessary-unit-wrap{
     display: grid;
-    width: 480px;
+    width: 570px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(3, 1fr);
     margin: 0px 0px 0px 20px;
