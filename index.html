@@ -28,14 +28,14 @@
 <p>次回通院日</p>
 <p>日数</p>
 <p>予備（day）</p>
-<input type="date" id="today" onChange="calc_days_until();">
-<input type="date" id="nextday" onChange="calc_days_until();">
+<input type="date" id="today" onChange="calcDaysUntil();">
+<input type="date" id="nextday" onChange="calcDaysUntil();">
 <p id="days-until">3</p>
 <input type="number" id="spareday" value="0">
 </div>
 <div style="margin: 20px"></div>
-<input type="button" style="margin: 0px 100px 0px 50px;" value="計算" onClick="calc();">
-<input type="button" value="Cookie保存" onClick="save_cookie();">
+<input type="button" style="margin: 0px 100px 0px 50px;" value="計算" onClick="calcNecessaryDrug();">
+<input type="button" value="Cookie保存" onClick="saveCookie();">
 
 <h1>詳細必要数</h1>
 <div class="necessary-unit-wrap">
@@ -96,16 +96,16 @@
     <p>捨てる量</p>
     <!--  -->
     <p>即効インスリン（本）</p>
-    <input type="number" class="day-use-fast-acting-insulin" value="0" oninput="calc_insulin('fast-acting-insulin')">
-    <input type="number" class="day-use-fast-acting-insulin" value="0" oninput="calc_insulin('fast-acting-insulin')">
-    <input type="number" class="day-use-fast-acting-insulin" value="0" oninput="calc_insulin('fast-acting-insulin')">
-    <input type="number" class="day-use-fast-acting-insulin" value="2" oninput="calc_insulin('fast-acting-insulin')">
+    <input type="number" class="day-use-fast-acting-insulin" value="0" oninput="calcInsulin('fast-acting-insulin')">
+    <input type="number" class="day-use-fast-acting-insulin" value="0" oninput="calcInsulin('fast-acting-insulin')">
+    <input type="number" class="day-use-fast-acting-insulin" value="0" oninput="calcInsulin('fast-acting-insulin')">
+    <input type="number" class="day-use-fast-acting-insulin" value="2" oninput="calcInsulin('fast-acting-insulin')">
     <!--  -->
     <p>持続インスリン（本）</p>
-    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calc_insulin('long-acting-insulin')">
-    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calc_insulin('long-acting-insulin')">
-    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calc_insulin('long-acting-insulin')">
-    <input type="number" class="day-use-long-acting-insulin" value="2" oninput="calc_insulin('long-acting-insulin')">
+    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calcInsulin('long-acting-insulin')">
+    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calcInsulin('long-acting-insulin')">
+    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calcInsulin('long-acting-insulin')">
+    <input type="number" class="day-use-long-acting-insulin" value="2" oninput="calcInsulin('long-acting-insulin')">
 </div>
 <h1>1日使用量・最小受け取り単位</h1>
 <div class="oneday-use-wrap">

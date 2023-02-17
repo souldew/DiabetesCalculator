@@ -1,7 +1,7 @@
-function calc(){
+function calcNecessaryDrug(){
     // 日付の計算
-    let necessary_day = document.getElementById("days-until").innerHTML;
-    let spare_day = document.getElementById("spareday").value;
+    let necessaryDay = document.getElementById("days-until").innerHTML;
+    let spareday = document.getElementById("spareday").value;
 
     // 詳細必要数を計算
     let items = [
@@ -18,69 +18,69 @@ function calc(){
     for (let i = 0; i < items.length; i++) {
         let item = items[i];
         let remaining = document.getElementsByClassName("remaining-wrap")[0].getElementsByClassName(item)[0].value;
-        let day_use = document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[0].value;
-        let minimum_recieved = parseInt(document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[1].value);
+        let dayUse = document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[0].value;
+        let minimumRecieved = parseInt(document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[1].value);
 
         // 最低必要数
-        let hituyousuu = parseInt(necessary_day)*parseInt(day_use) - parseInt(remaining);
-        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[0].innerHTML = hituyousuu;
+        let necessaryNum = parseInt(necessaryDay)*parseInt(dayUse) - parseInt(remaining);
+        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[0].innerHTML = necessaryNum;
         // 最低数+予備
-        hituyousuu = (parseInt(necessary_day)+parseInt(spare_day))*parseInt(day_use) - parseInt(remaining);
-        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[1].innerHTML = hituyousuu;
+        necessaryNum = (parseInt(necessaryDay)+parseInt(spareday))*parseInt(dayUse) - parseInt(remaining);
+        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[1].innerHTML = necessaryNum;
 
         // もらう量を変更
-        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[0].innerHTML = hituyousuu;
-        let gairyou = parseInt(parseInt(hituyousuu) / parseInt(minimum_recieved))*parseInt(minimum_recieved) + parseInt(minimum_recieved);
-        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[1].innerHTML = gairyou;
+        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[0].innerHTML = necessaryNum;
+        let approximateNum = parseInt(parseInt(necessaryNum) / parseInt(minimumRecieved))*parseInt(minimumRecieved) + parseInt(minimumRecieved);
+        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[1].innerHTML = approximateNum;
     }
     // インスリンの計算
     for (let i = 0; i < insulins.length; i++) {
         let item = insulins[i];
         let remaining = document.getElementsByClassName("remaining-wrap")[0].getElementsByClassName(item)[0].value;
-        let day_use = document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[0].innerHTML;
-        let minimum_recieved = parseInt(document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[1].value);
+        let dayUse = document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[0].innerHTML;
+        let minimumRecieved = parseInt(document.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(item)[1].value);
 
         //最低必要数
-        let hituyousuu = parseFloat((parseInt(necessary_day)*parseInt(day_use) - parseInt(remaining)*parseInt(minimum_recieved)) / parseInt(minimum_recieved));
-        hituyousuu = Math.floor(hituyousuu * 100) / 100 // 小数点第2以下切り捨て
-        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[0].innerHTML = hituyousuu;
+        let necessaryNum = parseFloat((parseInt(necessaryDay)*parseInt(dayUse) - parseInt(remaining)*parseInt(minimumRecieved)) / parseInt(minimumRecieved));
+        necessaryNum = Math.floor(necessaryNum * 100) / 100 // 小数点第2以下切り捨て
+        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[0].innerHTML = necessaryNum;
 
         //最低数+予備
-        hituyousuu = parseFloat(((parseInt(necessary_day)+parseInt(spare_day))*parseInt(day_use) - parseInt(remaining)*parseInt(minimum_recieved)) / parseInt(minimum_recieved));
-        hituyousuu = Math.floor(hituyousuu * 100) / 100 // 小数点第2以下切り捨て
-        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[1].innerHTML = hituyousuu;
+        necessaryNum = parseFloat(((parseInt(necessaryDay)+parseInt(spareday))*parseInt(dayUse) - parseInt(remaining)*parseInt(minimumRecieved)) / parseInt(minimumRecieved));
+        necessaryNum = Math.floor(necessaryNum * 100) / 100 // 小数点第2以下切り捨て
+        document.getElementsByClassName("necessary-unit-wrap")[0].getElementsByClassName(item)[1].innerHTML = necessaryNum;
 
         // もらう量を変更
-        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[0].innerHTML = hituyousuu;
-        let gairyou = parseInt(hituyousuu)+1;
-        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[1].innerHTML = gairyou;
+        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[0].innerHTML = necessaryNum;
+        let approximateNum = parseInt(necessaryNum)+1;
+        document.getElementsByClassName("received-wrap")[0].getElementsByClassName(item)[1].innerHTML = approximateNum;
     }
 }
 
-function calc_days_until(){
+function calcDaysUntil(){
     let last = new Date(document.getElementById("nextday").value);
     let start = new Date(document.getElementById("today").value);
 
     let diff = last.getTime() - start.getTime();
-    let diff_day = diff / (1000*60*60*24);
+    let diffDay = diff / (1000*60*60*24);
 
-    document.getElementById("days-until").innerHTML = diff_day;
+    document.getElementById("days-until").innerHTML = diffDay;
 }
 
-function calc_insulin(classname){
-    let used_insulin_lst = document.getElementsByClassName("insulin-wrap")[0].getElementsByClassName("day-use-" + classname);
+function calcInsulin(classname){
+    let usedInsulinLst = document.getElementsByClassName("insulin-wrap")[0].getElementsByClassName("day-use-" + classname);
     let ans = 0
     for (let i = 0; i < 3; i++) {
-        let value = used_insulin_lst[i].value;
+        let value = usedInsulinLst[i].value;
         if (value == 0) {
             continue
         }
-        ans += parseInt(value) + parseInt(used_insulin_lst[3].value)
+        ans += parseInt(value) + parseInt(usedInsulinLst[3].value)
     }
     document.body.getElementsByClassName("oneday-use-wrap")[0].getElementsByClassName(classname)[0].innerHTML = ans;
 }
 
-function save_cookie(){
+function saveCookie(){
     let items = [
         "alcohol",
         "glucose-needle",
@@ -89,20 +89,20 @@ function save_cookie(){
         "fast-acting-insulin",
         "long-acting-insulin"
     ];
-    let cookie_info = "SameSite=strict; Secure; Expires=Thu, 01 Jan 2099 00:00:00 GMT";
+    let cookieInfo = "SameSite=strict; Secure; Expires=Thu, 01 Jan 2099 00:00:00 GMT";
 
     // 残数
     let lst = document.getElementsByClassName("remaining-wrap")[0].getElementsByTagName("input");
     for (let i = 0; i < items.length; i++) {
         let value = lst[i].value;
-        let str = `remaining-${items[i]}=${value}; ${cookie_info}`;
+        let str = `remaining-${items[i]}=${value}; ${cookieInfo}`;
         document.cookie = str;
     }
 
     // 予備日
     do{
         let value = document.getElementById("spareday").value;
-        let str = `spareday=${value}; ${cookie_info}`;
+        let str = `spareday=${value}; ${cookieInfo}`;
         document.cookie = str;
     } while(0);
 
@@ -112,7 +112,7 @@ function save_cookie(){
         lst = document.getElementsByClassName("insulin-wrap")[0].getElementsByClassName(`day-use-${insulin}`);
         for (let i = 0; i < lst.length; i++){
             let value = lst[i].value;
-            let str = `day-use-${insulin}_${i}=${value}; ${cookie_info}`;
+            let str = `day-use-${insulin}_${i}=${value}; ${cookieInfo}`;
             document.cookie = str;
         }
     });
@@ -124,18 +124,18 @@ function save_cookie(){
         let item = items[item_i];
         if (!insulins.includes(item)) {
             let value = lst[input_i].value;
-            let str = `oneday-use-${item}=${value}; ${cookie_info}`;
+            let str = `oneday-use-${item}=${value}; ${cookieInfo}`;
             document.cookie = str;
             input_i++;
         }
         let value = lst[input_i].value;
-        let str = `min-${item}=${value}; ${cookie_info}`;
+        let str = `min-${item}=${value}; ${cookieInfo}`;
         document.cookie = str;
         input_i++;
     }
 }
 
-function load_cookie(){
+function loadCookie(){
     // cookie読み込み
     let cookiesStr = document.cookie;
     let cookieItems = cookiesStr.split(";");
@@ -213,12 +213,12 @@ let last = new Date(document.getElementById("nextday").value);
 let start = new Date(document.getElementById("today").value);
 
 let diff = last.getTime() - start.getTime();
-let diff_day = diff / (1000*60*60*24);
+let diffDay = diff / (1000*60*60*24);
 
-document.getElementById("days-until").innerHTML = diff_day;
+document.getElementById("days-until").innerHTML = diffDay;
 
 // Cookie読み込み
-load_cookie();
+loadCookie();
 // インスリン1日使用量の初期化
-calc_insulin("fast-acting-insulin");
-calc_insulin("long-acting-insulin");
+calcInsulin("fast-acting-insulin");
+calcInsulin("long-acting-insulin");
