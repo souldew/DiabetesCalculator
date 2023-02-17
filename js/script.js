@@ -217,8 +217,8 @@ let diff_day = diff / (1000*60*60*24);
 
 document.getElementById("days-until").innerHTML = diff_day;
 
+// Cookie読み込み
+load_cookie();
 // インスリン1日使用量の初期化
 calc_insulin("fast-acting-insulin");
 calc_insulin("long-acting-insulin");
-
-load_cookie();
