@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>index.html</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>残数</h1>
+<div class="remaining-wrap">
+    <p>アルコール</p>
+    <input type="number" class="alcohol" value="0">
+    <p>血糖針</p>
+    <input type="number" class="glucose-needle" value="0">
+    <p>LFSセンサー</p>
+    <input type="number" class="LFS" value="0">
+    <p>インスリン用針</p>
+    <input type="number" class="insulin-needle" value="0">
+    <p>ヒューマログ</p>
+    <input type="number" class="fast-acting-insulin" value="0">
+    <p>ランタス</p>
+    <input type="number" class="long-acting-insulin"value="0">
+</div>
+<hr size="5px" color="royalBulue">
+<div class="day-wrap">
+<p>通院日（当日）</p>
+<p>次回通院日</p>
+<p>日数</p>
+<p>予備（day）</p>
+<input type="date" id="today" onChange="calc_days_until();">
+<input type="date" id="nextday" onChange="calc_days_until();">
+<p id="days-until">3</p>
+<input type="number" id="spareday" value="5">
+</div>
+<div style="margin: 20px"></div>
+<input type="button" value="計算" onClick="calc();">
+
+<h1>詳細必要数</h1>
+<div class="necessary-unit-wrap">
+    <p></p>
+    <p>最低必要数</p>
+    <p>最低数+予備</p>
+    <p>アルコール</p>
+    <p class="alcohol">0</p>
+    <p class="alcohol">0</p>
+    <p>血糖針</p>
+    <p class="glucose-needle">0</p>
+    <p class="glucose-needle">0</p>
+    <p>LFSセンサー</p>
+    <p class="LFS">0</p>
+    <p class="LFS">0</p>
+    <p>インスリン用針</p>
+    <p class="insulin-needle">0</p>
+    <p class="insulin-needle">0</p>
+    <p>ヒューマログ</p>
+    <p class="fast-acting-insulin">0</p>
+    <p class="fast-acting-insulin">0</p>
+    <p>ランタス</p>
+    <p class="long-acting-insulin">0</p>
+    <p class="long-acting-insulin">0</p>
+</div>
+
+<h1>もらう量</h1>
+<div class="received-wrap">
+    <p></p>
+    <p>正確量</p>
+    <p>概量</p>
+    <p>アルコール</p>
+    <p class="alcohol">0</p>
+    <p class="alcohol">0</p>
+    <p>血糖針</p>
+    <p class="glucose-needle">0</p>
+    <p class="glucose-needle">0</p>
+    <p>LFSセンサー</p>
+    <p class="LFS">0</p>
+    <p class="LFS">0</p>
+    <p>インスリン用針</p>
+    <p class="insulin-needle">0</p>
+    <p class="insulin-needle">0</p>
+    <p>ヒューマログ</p>
+    <p class="fast-acting-insulin">0</p>
+    <p class="fast-acting-insulin">0</p>
+    <p>ランタス</p>
+    <p class="long-acting-insulin">0</p>
+    <p class="long-acting-insulin">0</p>
+</div>
+<hr size="5px" color="royalBulue">
+<h1>インスリン1日使用量</h1>
+<div class="insulin-wrap">
+    <p>インスリン</p>
+    <p>朝</p>
+    <p>昼</p>
+    <p>夜</p>
+    <p>捨てる量</p>
+    <!--  -->
+    <p>ヒューマログ</p>
+    <input type="number" class="day-use-fast-acting-insulin" value="10" oninput="calc_insulin('fast-acting-insulin')">
+    <input type="number" class="day-use-fast-acting-insulin" value="17" oninput="calc_insulin('fast-acting-insulin')">
+    <input type="number" class="day-use-fast-acting-insulin" value="16" oninput="calc_insulin('fast-acting-insulin')">
+    <input type="number" class="day-use-fast-acting-insulin" value="1" oninput="calc_insulin('fast-acting-insulin')">
+    <!--  -->
+    <p>ランタス</p>
+    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calc_insulin('long-acting-insulin')">
+    <input type="number" class="day-use-long-acting-insulin" value="0" oninput="calc_insulin('long-acting-insulin')">
+    <input type="number" class="day-use-long-acting-insulin" value="32" oninput="calc_insulin('long-acting-insulin')">
+    <input type="number" class="day-use-long-acting-insulin" value="1" oninput="calc_insulin('long-acting-insulin')">
+</div>
+<h1>1日使用量・最小受け取り単位</h1>
+<div class="oneday-use-wrap">
+    <p></p>
+    <p>使用量/day</p>
+    <p>最小単位</p>
+    <p>アルコール</p>
+    <input type="number" class="alcohol" value="4">
+    <input type="number" class="alcohol" value="10">
+    <p>血糖針</p>
+    <input type="number" class="glucose-needle" value="4">
+    <input type="number" class="glucose-needle" value="30">
+    <p>LFSセンサー</p>
+    <input type="number" class="LFS" value="4">
+    <input type="number" class="LFS" value="30">
+    <p>インスリン用針</p>
+    <input type="number" class="insulin-needle" value="4">
+    <input type="number" class="insulin-needle" value="14">
+    <p>ヒューマログ（単位）</p>
+    <p class="fast-acting-insulin">0</p>
+    <input type="number" class="fast-acting-insulin" value="300">
+    <p>ランタス（単位）</p>
+    <p class="long-acting-insulin">0</p>
+    <input type="number" class="long-acting-insulin" value="450">
+</div>
+
+<div style="margin: 100px"></div>
+<script src="./js/script.js"></script>
+</body>
+</html>
