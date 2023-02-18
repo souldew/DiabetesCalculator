@@ -133,6 +133,7 @@ function saveCookie(){
         document.cookie = str;
         input_i++;
     }
+    alert("保存しました");
 }
 
 function loadCookie(){
